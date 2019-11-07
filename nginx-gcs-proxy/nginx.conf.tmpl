@@ -45,7 +45,7 @@ http {
    }
 
     server {
-        listen          {{ .Env.LISTEN_PORT }};
+        listen          {{ .Env.PORT }};
 
         if ( $request_method !~ "GET|HEAD" ) {
             return 405;
