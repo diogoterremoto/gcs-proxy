@@ -97,7 +97,7 @@ http {
 		{{ if .Env.BUCKET_NAME }}
 			proxy_pass              http://google-cloud-storage/{{ .Env.BUCKET_NAME }}$uri;
 		{{ else }}
-			proxy_pass              http://google-cloud-storage/$host/$uri;
+			proxy_pass              http://google-cloud-storage/$host$uri;
 		{{ end }}
 		}
 	}
