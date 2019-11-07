@@ -1,8 +1,7 @@
-FROM nginx:1.13.8
+FROM nginx:1.16
 
 # Set variables
-ENV DOCKERIZE_VERSION v0.6.0
-ENV PORT "8080"
+ENV DOCKERIZE_VERSION v0.6.1
 ENV NOT_FOUND_MEANS_INDEX "false"
 
 # Update system
