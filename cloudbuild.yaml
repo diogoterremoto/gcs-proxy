@@ -1,0 +1,35 @@
+steps:
+- id: build
+  name: gcr.io/cloud-builders/docker
+  args:
+    - build
+    - "--tag=eu.gcr.io/$PROJECT_ID/${_APP_NAME}:$SHORT_SHA"
+    - "--tag=eu.gcr.io/$PROJECT_ID/${_APP_NAME}:latest"
+    - "."
+
+- id: push-image-1
+  name: gcr.io/cloud-builders/docker
+  args:
+    - push
+    - eu.gcr.io/$PROJECT_ID/${_APP_NAME}:$SHORT_SHA
+
+- id: push-image-2
+  name: gcr.io/cloud-builders/docker
+  args:
+    - push
+    - eu.gcr.io/$PROJECT_ID/${_APP_NAME}:latest
+
+- id: deploy
+  name: gcr.io/cloud-builders/gcloud
+  args:
+    - beta
+    - run
+    - deploy
+    - "--platform=managed"
+    - "--region=europe-west1"
+    - "${_APP_NAME}"
+    - "--image=eu.gcr.io/$PROJECT_ID/${_APP_NAME}:$SHORT_SHA"
+
+images:
+  - eu.gcr.io/$PROJECT_ID/${_APP_NAME}:$SHORT_SHA
+  - eu.gcr.io/$PROJECT_ID/${_APP_NAME}:latest
