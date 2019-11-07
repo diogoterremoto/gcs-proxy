@@ -1,7 +1,7 @@
 FROM nginx:1.13.8
 RUN apt-get update \
     && apt-get install -y \
-        wget \
+    wget \
     && rm -r /var/lib/apt/lists/*
 ENV DOCKERIZE_VERSION v0.6.0
 RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
@@ -14,8 +14,8 @@ ENV PORT "8080"
 ENV NOT_FOUND_MEANS_INDEX "false"
 
 ENTRYPOINT ["dockerize", \
-            "-template", \
-            "/etc/nginx/nginx.conf.tmpl:/etc/nginx/nginx.conf"]
+    "-template", \
+    "/etc/nginx/nginx.conf.tmpl:/etc/nginx/nginx.conf"]
 CMD ["nginx", \
     "-g", \
     "daemon off;"]
