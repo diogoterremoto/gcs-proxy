@@ -7,7 +7,7 @@ This is the Git repo for the Docker image built automatically at Docker Hub -
 ## Usage
 
 ```bash
-docker run -d -e GCS_BUCKET_URL="[bucket/folder]" -p 8080:8080 socialwifi/nginx-gcs-proxy
+docker run -d -e BUCKET_NAME="[bucket/folder]" -p 8080:8080 socialwifi/nginx-gcs-proxy
 
 ```
 
@@ -17,7 +17,7 @@ The following tables lists the configurable environment variables of nginx-gcs-p
 
 Variable | Description | Default
 --- | --- | ---
-`GCS_BUCKET_URL` | Full URL to the bucket folder. `https://storage.googleapis.com/[GCS_BUCKET_URL]/index.html` | None - required!
+`BUCKET_NAME` | Full URL to the bucket folder. `https://storage.googleapis.com/[BUCKET_NAME]/index.html` | None - required!
 `PORT` | Server listen port | 8080
 `NOT_FOUND_MEANS_INDEX` | When requested path is not found in the bucket, return index.html. Useful when serving single page apps, like Angular, React, Ember. Possible values: "true", "false". | false
 
@@ -56,5 +56,5 @@ docker build nginx-gcs-proxy -t socialwifi/nginx-gcs-proxy
 ## Testing
 
 ```bash
-docker run --rm -e GCS_BUCKET_URL="dummy" socialwifi/nginx-gcs-proxy nginx -t
+docker run --rm -e BUCKET_NAME="dummy" socialwifi/nginx-gcs-proxy nginx -t
 ```
